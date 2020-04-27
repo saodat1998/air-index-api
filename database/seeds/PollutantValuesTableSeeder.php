@@ -11,8 +11,6 @@ class PollutantValuesTableSeeder extends Seeder
      */
     public function run()
     {
-
-
         /* `air`.`pollutant_values` */
         $pollutant_values = array(
             array('id' => '1','pollutant_id' => '1','aqi_category_id' => '1','min' => '0.00','max' => '54.00','created_at' => NULL,'updated_at' => NULL),

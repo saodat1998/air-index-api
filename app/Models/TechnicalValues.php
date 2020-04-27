@@ -28,6 +28,7 @@ class TechnicalValues extends Model implements Transformable
 		'aqi_category_id',
 		'status',
 		'date',
+		'data_type',
 	];
 
 }
