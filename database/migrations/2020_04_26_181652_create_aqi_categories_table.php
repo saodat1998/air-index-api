@@ -22,6 +22,7 @@ class CreateAqiCategoriesTable extends Migration
             $table->float('min')->nullable();
             $table->float('avg')->nullable();
             $table->unsignedBigInteger('unit_id');
+            $table->foreign('unit_id')->references('id')->on('units');
             $table->text('description')->nullable();
 
             $table->timestamps();

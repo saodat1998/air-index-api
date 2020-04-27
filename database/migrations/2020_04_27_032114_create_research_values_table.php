@@ -18,7 +18,9 @@ class CreateResearchValuesTable extends Migration
 		Schema::create('research_values', function(Blueprint $table) {
             $table->id();
 			$table->unsignedBigInteger('employee_id');
+            $table->foreign('employee_id')->references('id')->on('employees');
             $table->unsignedBigInteger('technical_value_id');
+            $table->foreign('technical_value_id')->references('id')->on('technical_values');
 			$table->float('value');
 			$table->integer('status');
 
