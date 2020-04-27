@@ -16,9 +16,10 @@ class CreateUnitsTable extends Migration
 	public function up()
 	{
 		Schema::create('units', function(Blueprint $table) {
-            $table->increments('id');
-			$table->id('integer')->integer();
-			$table->note('string')->string();
+            $table->id();
+			$table->text('name');
+			$table->text('formula')->nullable();
+			$table->text('note')->nullable();
 
             $table->timestamps();
 		});

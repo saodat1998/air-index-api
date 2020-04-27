@@ -44,31 +44,23 @@ class UnitsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $units = $this->repository->all();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $units,
-            ]);
-        }
-
-        return view('units.index', compact('units'));
+        return response()->json([
+            'data' => $units,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UnitCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @param UnitCreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(UnitCreateRequest $request)
     {
@@ -83,68 +75,36 @@ class UnitsController extends Controller
                 'data'    => $unit->toArray(),
             ];
 
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            return response()->json($response);
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return response()->json([
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ]);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
         $unit = $this->repository->find($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $unit,
-            ]);
-        }
-
-        return view('units.show', compact('unit'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $unit = $this->repository->find($id);
-
-        return view('units.edit', compact('unit'));
+        return response()->json([
+            'data' => $unit,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UnitUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @param UnitUpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UnitUpdateRequest $request, $id)
     {
@@ -158,24 +118,15 @@ class UnitsController extends Controller
                 'message' => 'Unit updated.',
                 'data'    => $unit->toArray(),
             ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            return response()->json($response);
         } catch (ValidatorException $e) {
 
-            if ($request->wantsJson()) {
+            return response()->json([
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ]);
 
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -183,22 +134,16 @@ class UnitsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
         $deleted = $this->repository->delete($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Unit deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-
-        return redirect()->back()->with('message', 'Unit deleted.');
+        return response()->json([
+            'message' => 'Unit deleted.',
+            'deleted' => $deleted,
+        ]);
     }
 }

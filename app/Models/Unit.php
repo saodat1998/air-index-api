@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\PresentableTrait;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
@@ -13,7 +14,7 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class Unit extends Model implements Transformable
 {
-    use TransformableTrait;
+    use TransformableTrait, PresentableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -21,8 +22,9 @@ class Unit extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-		'integer',
-		'string',
+		'name',
+		'formula',
+		'note',
 	];
 
 }

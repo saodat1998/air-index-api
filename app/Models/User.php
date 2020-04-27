@@ -17,7 +17,6 @@ use Prettus\Repository\Traits\TransformableTrait;
  * @property string $email
  * @property string $phone
  * @property string $password
- * @property integer $default_app_id
  */
 class User extends Authenticatable implements Transformable
 {
@@ -29,7 +28,7 @@ class User extends Authenticatable implements Transformable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'password', 'default_app_id',
+        'name', 'email', 'phone', 'password',
     ];
 
     /**
