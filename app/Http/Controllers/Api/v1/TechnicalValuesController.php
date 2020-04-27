@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Services\EntityService\TechnicalValuesService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -30,15 +31,21 @@ class TechnicalValuesController extends Controller
     protected $validator;
 
     /**
+     * @var TechnicalValuesService
+     */
+    protected $service;
+
+    /**
      * TechnicalValuesController constructor.
      *
      * @param TechnicalValuesRepository $repository
      * @param TechnicalValuesValidator $validator
      */
-    public function __construct(TechnicalValuesRepository $repository, TechnicalValuesValidator $validator)
+    public function __construct(TechnicalValuesRepository $repository, TechnicalValuesValidator $validator, TechnicalValuesService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
+        $this->service = $service;
     }
 
     /**
@@ -68,7 +75,7 @@ class TechnicalValuesController extends Controller
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $technicValue = $this->repository->create($request->all());
+            $technicValue = $this->service->store($request->all());
 
             $response = [
                 'message' => 'TechnicalValues created.',
