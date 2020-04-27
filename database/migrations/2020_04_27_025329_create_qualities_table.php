@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateAqiValuesTable.
  */
-class CreateAqiValuesTable extends Migration
+class CreateQualitiesTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,7 +15,7 @@ class CreateAqiValuesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('aqi_values', function(Blueprint $table) {
+		Schema::create('qualities', function(Blueprint $table) {
 			$table->id();
             $table->float('value');
             $table->date('date')->nullable();
@@ -35,6 +35,6 @@ class CreateAqiValuesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('aqi_values');
+		Schema::drop('qualities');
 	}
 }

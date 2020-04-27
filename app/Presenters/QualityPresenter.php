@@ -2,15 +2,15 @@
 
 namespace App\Presenters;
 
-use App\Transformers\AqiValuesTransformer;
+use App\Transformers\QualityTransformer;
 use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
- * Class AqiValuesPresenter.
+ * Class QualityPresenter.
  *
  * @package namespace App\Presenters;
  */
-class AqiValuesPresenter extends FractalPresenter
+class QualityPresenter extends FractalPresenter
 {
     /**
      * Transformer
@@ -19,6 +19,6 @@ class AqiValuesPresenter extends FractalPresenter
      */
     public function getTransformer()
     {
-        return new AqiValuesTransformer();
+        return new QualityTransformer();
     }
 }

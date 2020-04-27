@@ -49,7 +49,7 @@ class TechnicalValuesController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $technicValues = $this->repository->with(['aqi_values'])->all();
+        $technicValues = $this->repository->with(['qualities'])->all();
 
         return response()->json([
             'data' => $technicValues,
@@ -92,7 +92,7 @@ class TechnicalValuesController extends Controller
      */
     public function show($id)
     {
-        $technicValue = $this->repository->with(['aqi_values'])->find($id);
+        $technicValue = $this->repository->with(['qualities'])->find($id);
 
         return response()->json([
             'data' => $technicValue,

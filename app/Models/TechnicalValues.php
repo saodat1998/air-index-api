@@ -14,6 +14,8 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class TechnicalValues extends Model implements Transformable
 {
+    protected $table = 'technician';
+
     use TransformableTrait, PresentableTrait;
 
     protected $appends = ['aqi_category_name', 'region_name'];

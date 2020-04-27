@@ -7,35 +7,35 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\AqiValuesCreateRequest;
-use App\Http\Requests\AqiValuesUpdateRequest;
-use App\Repositories\Contracts\AqiValuesRepository;
-use App\Validators\AqiValuesValidator;
+use App\Http\Requests\QualityCreateRequest;
+use App\Http\Requests\QualityUpdateRequest;
+use App\Repositories\Contracts\QualityRepository;
+use App\Validators\QualityValidator;
 
 /**
- * Class AqiValuesController.
+ * Class QualitiesController.
  *
  * @package namespace App\Http\Controllers\Api\v1;
  */
-class AqiValuesController extends Controller
+class QualitiesController extends Controller
 {
     /**
-     * @var AqiValuesRepository
+     * @var QualityRepository
      */
     protected $repository;
 
     /**
-     * @var AqiValuesValidator
+     * @var QualityValidator
      */
     protected $validator;
 
     /**
-     * AqiValuesController constructor.
+     * QualitiesController constructor.
      *
-     * @param AqiValuesRepository $repository
-     * @param AqiValuesValidator $validator
+     * @param QualityRepository $repository
+     * @param QualityValidator $validator
      */
-    public function __construct(AqiValuesRepository $repository, AqiValuesValidator $validator)
+    public function __construct(QualityRepository $repository, QualityValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,30 +49,30 @@ class AqiValuesController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $aqiValues = $this->repository->all();
+        $qualities = $this->repository->all();
 
         return response()->json([
-            'data' => $aqiValues,
+            'data' => $qualities,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param AqiValuesCreateRequest $request
+     * @param QualityCreateRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(AqiValuesCreateRequest $request)
+    public function store(QualityCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $aqiValue = $this->repository->create($request->all());
+            $quality = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'AqiValues created.',
-                'data'    => $aqiValue->toArray(),
+                'message' => 'Quality created.',
+                'data'    => $quality->toArray(),
             ];
 
             return response()->json($response);
@@ -92,31 +92,30 @@ class AqiValuesController extends Controller
      */
     public function show($id)
     {
-        $aqiValue = $this->repository->find($id);
-
+        $quality = $this->repository->find($id);
         return response()->json([
-            'data' => $aqiValue,
+            'data' => $quality,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param AqiValuesUpdateRequest $request
+     * @param QualityUpdateRequest $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(AqiValuesUpdateRequest $request, $id)
+    public function update(QualityUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $aqiValue = $this->repository->update($request->all(), $id);
+            $quality = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'AqiValues updated.',
-                'data'    => $aqiValue->toArray(),
+                'message' => 'Quality updated.',
+                'data'    => $quality->toArray(),
             ];
 
             return response()->json($response);
@@ -141,7 +140,7 @@ class AqiValuesController extends Controller
         $deleted = $this->repository->delete($id);
 
         return response()->json([
-            'message' => 'AqiValues deleted.',
+            'message' => 'Quality deleted.',
             'deleted' => $deleted,
         ]);
     }

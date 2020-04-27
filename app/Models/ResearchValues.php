@@ -14,6 +14,8 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class ResearchValues extends Model implements Transformable
 {
+    protected $table = 'researcher';
+
     use TransformableTrait, PresentableTrait;
 
     /**

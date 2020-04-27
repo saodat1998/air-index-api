@@ -4,16 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\Contracts\AqiValuesRepository;
-use App\Models\AqiValues;
-use App\Validators\AqiValuesValidator;
+use App\Repositories\Contracts\QualityRepository;
+use App\Models\Quality;
+use App\Validators\QualityValidator;
 
 /**
- * Class AqiValuesRepositoryEloquent.
+ * Class QualityRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class AqiValuesRepositoryEloquent extends BaseRepository implements AqiValuesRepository
+class QualityRepositoryEloquent extends BaseRepository implements QualityRepository
 {
     /**
      * Specify Model class name
@@ -22,7 +22,7 @@ class AqiValuesRepositoryEloquent extends BaseRepository implements AqiValuesRep
      */
     public function model()
     {
-        return AqiValues::class;
+        return Quality::class;
     }
 
     /**
@@ -33,7 +33,7 @@ class AqiValuesRepositoryEloquent extends BaseRepository implements AqiValuesRep
     public function validator()
     {
 
-        return AqiValuesValidator::class;
+        return QualityValidator::class;
     }
 
 

@@ -7,11 +7,11 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class AqiValues.
+ * Class Quality.
  *
  * @package namespace App\Models;
  */
-class AqiValues extends Model implements Transformable
+class Quality extends Model implements Transformable
 {
     use TransformableTrait;
 
@@ -21,10 +21,10 @@ class AqiValues extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-		'pollutant_id',
-		'technical_value_id',
-		'value',
-		'date',
+        'pollutant_id',
+        'technical_value_id',
+        'value',
+        'date',
 	];
 
 }

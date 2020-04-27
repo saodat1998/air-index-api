@@ -14,6 +14,8 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class StatisticValues extends Model implements Transformable
 {
+    protected $table = 'statistic_collector';
+
     use TransformableTrait, PresentableTrait;
 
     /**
