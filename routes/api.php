@@ -360,37 +360,37 @@ Route::group([
     // Units
     Route::group([
         'middleware' => 'auth:api',
-        'prefix'     => 'units',
+        'prefix'     => 'pollutants',
     ], function () {
 
         Route::get('/', [
             'as'   => 'index',
-            'uses' => 'UnitsController@index',
+            'uses' => 'PollutantsController@index',
         ]);
 
         Route::get('/index', [
             'as'   => 'index',
-            'uses' => 'UnitsController@index',
+            'uses' => 'PollutantsController@index',
         ]);
 
         Route::post('/create', [
             'as'   => 'create',
-            'uses' => 'UnitsController@store',
+            'uses' => 'PollutantsController@store',
         ]);
 
         Route::get('/{id}', [
             'as'   => 'show',
-            'uses' => 'UnitsController@show',
+            'uses' => 'PollutantsController@show',
         ]);
 
         Route::post('/update/{id}', [
             'as'   => 'update',
-            'uses' => 'UnitsController@update',
+            'uses' => 'PollutantsController@update',
         ]);
 
         Route::post('/delete/{id}', [
             'as'   => 'delete',
-            'uses' => 'UnitsController@destroy',
+            'uses' => 'PollutantsController@destroy',
         ]);
 
     });
