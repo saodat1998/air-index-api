@@ -12,21 +12,20 @@ class UnitsTableSeeder extends Seeder
     public function run()
     {
 
-
         /**
          * Database `air`
          */
 
         /* `air`.`units` */
         $units = array(
-            array('id' => '1','name' => 'PM10 (24hr)'),
-            array('id' => '2','name' => 'PM2.5 (24hr)'),
-            array('id' => '3','name' => 'NO2 (24hr)'),
-            array('id' => '4','name' => 'O3 (8hr)'),
-            array('id' => '5','name' => 'CO (8hr)'),
-            array('id' => '6','name' => 'SO2 (24hr)'),
-            array('id' => '7','name' => 'NH3 (24hr)'),
-            array('id' => '8','name' => 'Pb (24hr)',)
+            array('id' => '1','name' => 'O3 (ppb)-8hr','calculation_period' => '8hr','formula' => NULL,'note' => NULL,'created_at' => NULL,'updated_at' => NULL),
+            array('id' => '2','name' => 'O3 (ppb)-1hr','calculation_period' => '1hr','formula' => NULL,'note' => NULL,'created_at' => NULL,'updated_at' => NULL),
+            array('id' => '3','name' => 'PM2.5 (μg/m3)-24hr','calculation_period' => '24hr','formula' => NULL,'note' => NULL,'created_at' => NULL,'updated_at' => NULL),
+            array('id' => '4','name' => 'PM10 (μg/m3)-24hr','calculation_period' => '24hr','formula' => NULL,'note' => NULL,'created_at' => NULL,'updated_at' => NULL),
+            array('id' => '5','name' => 'CO (ppm)-8hr','calculation_period' => '8hr','formula' => NULL,'note' => NULL,'created_at' => NULL,'updated_at' => NULL),
+            array('id' => '6','name' => 'SO2 (ppb)-1hr','calculation_period' => '1hr','formula' => NULL,'note' => NULL,'created_at' => NULL,'updated_at' => NULL),
+            array('id' => '7','name' => 'SO2 (ppb)-24hr','calculation_period' => '24hr','formula' => NULL,'note' => NULL,'created_at' => NULL,'updated_at' => NULL),
+            array('id' => '8','name' => 'NO2 (ppb)-1hr','calculation_period' => '1hr','formula' => NULL,'note' => NULL,'created_at' => NULL,'updated_at' => NULL)
         );
 
         DB::table('units')->insert($units);

@@ -23,6 +23,7 @@ class Unit extends Model implements Transformable
      */
     protected $fillable = [
 		'name',
+		'calculation_period',
 		'formula',
 		'note',
 	];

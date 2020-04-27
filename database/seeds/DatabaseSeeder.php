@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsTableSeeder::class);
         $this->call(AqiCategoriesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
+        $this->call(UnitValuesTableSeeder::class);
     }
 }

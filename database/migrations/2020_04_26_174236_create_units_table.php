@@ -18,6 +18,7 @@ class CreateUnitsTable extends Migration
 		Schema::create('units', function(Blueprint $table) {
             $table->id();
 			$table->text('name');
+			$table->string('calculation_period')->nullable();
 			$table->text('formula')->nullable();
 			$table->text('note')->nullable();
 

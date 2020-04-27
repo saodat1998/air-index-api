@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\PresentableTrait;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class ResearchValues.
+ * Class UnitValues.
  *
  * @package namespace App\Models;
  */
-class ResearchValues extends Model implements Transformable
+class UnitValues extends Model implements Transformable
 {
-    use TransformableTrait, PresentableTrait;
+    use TransformableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -22,11 +21,10 @@ class ResearchValues extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-		'technical_value_id',
-        'value',
-        'employee_id',
-        'status',
-        'date',
+		'id',
+		'unit_id',
+		'min',
+		'max',
 	];
 
 }
