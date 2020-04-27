@@ -24,6 +24,11 @@ class Region extends Model implements Transformable
     protected $fillable = [
 		'id',
 		'name',
+		'hasc',
+		'iso',
+		'area_km',
+		'area_mi',
+		'capital',
 		'zip_code',
 		'population',
 		'vehicles',

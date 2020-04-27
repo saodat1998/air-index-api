@@ -18,6 +18,11 @@ class CreateRegionsTable extends Migration
 		Schema::create('regions', function(Blueprint $table) {
 			$table->id();
 			$table->string('name');
+			$table->string('hasc')->nullable();
+			$table->string('iso')->nullable();
+			$table->string('area_km')->nullable();
+			$table->string('area_mi')->nullable();
+			$table->string('capital')->nullable();
 			$table->string('zip_code')->nullable();
 			$table->integer('population')->nullable();
 			$table->integer('vehicles')->nullable();

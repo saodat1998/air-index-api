@@ -2,8 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Topic;
-use App\Models\SmsApp;
 use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
@@ -17,9 +15,24 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'email' => env('ADMIN_EMAIL_1', 'test2@test.com'),
-                'phone' => env('ADMIN_PHONE_1', '+000000000000'),
-                'name' => 'Admin',
+                'email' => 'test1@test.com',
+                'phone' => '+000000000000',
+                'first_name' => 'User1',
+                'last_name' => '',
+                'password' => Hash::make('Password123')
+            ],
+            [
+                'email' => 'test2@test.com',
+                'phone' => '+000000000000',
+                'first_name' => 'User2',
+                'last_name' => '',
+                'password' => Hash::make('Password123')
+            ],
+            [
+                'email' => 'test3@test.com',
+                'phone' => '+000000000000',
+                'first_name' => 'User3',
+                'last_name' => '',
                 'password' => Hash::make('Password123')
             ],
         ];

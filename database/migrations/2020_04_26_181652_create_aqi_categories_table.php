@@ -18,11 +18,11 @@ class CreateAqiCategoriesTable extends Migration
 		Schema::create('aqi_categories', function(Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('max')->nullable();
+            $table->string('color');
             $table->float('min')->nullable();
-            $table->float('avg')->nullable();
-            $table->unsignedBigInteger('unit_id');
-            $table->foreign('unit_id')->references('id')->on('units');
+            $table->float('max')->nullable();
+            $table->text('health_implications')->nullable();
+            $table->text('recommendation')->nullable();
             $table->text('description')->nullable();
 
             $table->timestamps();

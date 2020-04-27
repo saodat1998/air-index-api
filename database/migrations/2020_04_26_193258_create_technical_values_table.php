@@ -16,7 +16,7 @@ class CreateTechnicalValuesTable extends Migration
 	public function up()
 	{
 		Schema::create('technical_values', function(Blueprint $table) {
-            $table->increments('id');
+            $table->id();
 			$table->float('value');
 			$table->unsignedBigInteger('region_id');
             $table->foreign('region_id')->references('id')->on('regions');

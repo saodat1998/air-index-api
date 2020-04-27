@@ -24,9 +24,10 @@ class AqiCategory extends Model implements Transformable
     protected $fillable = [
 		'name',
 		'max',
+		'color',
+		'health_implications',
 		'min',
-		'avg',
-		'unit_id',
+		'recommendation',
 		'description',
 	];
 

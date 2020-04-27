@@ -23,6 +23,7 @@ class Employee extends Model implements Transformable
      */
     protected $fillable = [
 		'department_id',
+		'user_id',
 	];
 
 }
