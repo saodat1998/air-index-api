@@ -6,11 +6,11 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
 /**
- * Class UnitValuesValidator.
+ * Class PollutantValidator.
  *
  * @package namespace App\Validators;
  */
-class UnitValuesValidator extends LaravelValidator
+class PollutantValidator extends LaravelValidator
 {
     /**
      * Validation Rules
@@ -18,7 +18,11 @@ class UnitValuesValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+		'name' => 'required|min:2',
+	],
+        ValidatorInterface::RULE_UPDATE => [
+            'name' => 'required|min:2',
+	],
     ];
 }

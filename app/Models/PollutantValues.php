@@ -7,11 +7,11 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class UnitValues.
+ * Class PollutantValues.
  *
  * @package namespace App\Models;
  */
-class UnitValues extends Model implements Transformable
+class PollutantValues extends Model implements Transformable
 {
     use TransformableTrait;
 

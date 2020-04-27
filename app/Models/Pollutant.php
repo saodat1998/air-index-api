@@ -8,11 +8,11 @@ use Prettus\Repository\Traits\PresentableTrait;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Unit.
+ * Class Pollutant.
  *
  * @package namespace App\Models;
  */
-class Unit extends Model implements Transformable
+class Pollutant extends Model implements Transformable
 {
     use TransformableTrait, PresentableTrait;
 

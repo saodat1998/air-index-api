@@ -7,35 +7,35 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UnitCreateRequest;
-use App\Http\Requests\UnitUpdateRequest;
-use App\Repositories\Contracts\UnitRepository;
-use App\Validators\UnitValidator;
+use App\Http\Requests\PollutantValuesCreateRequest;
+use App\Http\Requests\PollutantValuesUpdateRequest;
+use App\Repositories\Contracts\PollutantValuesRepository;
+use App\Validators\PollutantValuesValidator;
 
 /**
- * Class UnitsController.
+ * Class PollutantValuesController.
  *
  * @package namespace App\Http\Controllers\Api\v1;
  */
-class UnitsController extends Controller
+class PollutantValuesController extends Controller
 {
     /**
-     * @var UnitRepository
+     * @var PollutantValuesRepository
      */
     protected $repository;
 
     /**
-     * @var UnitValidator
+     * @var PollutantValuesValidator
      */
     protected $validator;
 
     /**
-     * UnitsController constructor.
+     * PollutantValuesController constructor.
      *
-     * @param UnitRepository $repository
-     * @param UnitValidator $validator
+     * @param PollutantValuesRepository $repository
+     * @param PollutantValuesValidator $validator
      */
-    public function __construct(UnitRepository $repository, UnitValidator $validator)
+    public function __construct(PollutantValuesRepository $repository, PollutantValuesValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,42 @@ class UnitsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $units = $this->repository->all();
+        $unitValues = $this->repository->all();
 
         return response()->json([
-            'data' => $units,
+            'data' => $unitValues,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param UnitCreateRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param PollutantValuesCreateRequest $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function store(UnitCreateRequest $request)
+    public function store(PollutantValuesCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $unit = $this->repository->create($request->all());
+            $unitValue = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Unit created.',
-                'data'    => $unit->toArray(),
+                'message' => 'PollutantValues created.',
+                'data'    => $unitValue->toArray(),
             ];
 
             return response()->json($response);
         } catch (ValidatorException $e) {
-            return response()->json([
-                'error'   => true,
-                'message' => $e->getMessageBag()
-            ]);
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -92,32 +96,33 @@ class UnitsController extends Controller
      */
     public function show($id)
     {
-        $unit = $this->repository->find($id);
+        $unitValue = $this->repository->find($id);
 
         return response()->json([
-            'data' => $unit,
+            'data' => $unitValue,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param UnitUpdateRequest $request
+     * @param PollutantValuesUpdateRequest $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UnitUpdateRequest $request, $id)
+    public function update(PollutantValuesUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $unit = $this->repository->update($request->all(), $id);
+            $unitValue = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Unit updated.',
-                'data'    => $unit->toArray(),
+                'message' => 'PollutantValues updated.',
+                'data'    => $unitValue->toArray(),
             ];
+
             return response()->json($response);
         } catch (ValidatorException $e) {
 
@@ -125,8 +130,6 @@ class UnitsController extends Controller
                 'error'   => true,
                 'message' => $e->getMessageBag()
             ]);
-
-
         }
     }
 
@@ -142,7 +145,7 @@ class UnitsController extends Controller
         $deleted = $this->repository->delete($id);
 
         return response()->json([
-            'message' => 'Unit deleted.',
+            'message' => 'PollutantValues deleted.',
             'deleted' => $deleted,
         ]);
     }

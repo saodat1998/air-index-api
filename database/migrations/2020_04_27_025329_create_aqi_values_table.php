@@ -17,10 +17,12 @@ class CreateAqiValuesTable extends Migration
 	{
 		Schema::create('aqi_values', function(Blueprint $table) {
 			$table->id();
+            $table->float('value');
             $table->date('date')->nullable();
-			$table->unsignedBigInteger('unit_id');
-            $table->foreign('unit_id')->references('id')->on('units');
-			$table->float('value');
+            $table->unsignedBigInteger('pollutant_id');
+            $table->foreign('pollutant_id')->references('id')->on('pollutants');
+            $table->unsignedBigInteger('technical_value_id');
+            $table->foreign('technical_value_id')->references('id')->on('technical_values');
 
             $table->timestamps();
 		});

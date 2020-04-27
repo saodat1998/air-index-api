@@ -3,23 +3,23 @@
 namespace App\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use App\Models\Unit;
+use App\Models\Pollutant;
 
 /**
- * Class UnitTransformer.
+ * Class PollutantTransformer.
  *
  * @package namespace App\Transformers;
  */
-class UnitTransformer extends TransformerAbstract
+class PollutantTransformer extends TransformerAbstract
 {
     /**
-     * Transform the Unit entity.
+     * Transform the Pollutant entity.
      *
-     * @param \App\Models\Unit $model
+     * @param \App\Models\Pollutant $model
      *
      * @return array
      */
-    public function transform(Unit $model)
+    public function transform(Pollutant $model)
     {
         return [
             'id'         => (int) $model->id,

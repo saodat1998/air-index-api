@@ -2,15 +2,15 @@
 
 namespace App\Presenters;
 
-use App\Transformers\UnitValuesTransformer;
+use App\Transformers\PollutantTransformer;
 use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
- * Class UnitValuesPresenter.
+ * Class PollutantPresenter.
  *
  * @package namespace App\Presenters;
  */
-class UnitValuesPresenter extends FractalPresenter
+class PollutantPresenter extends FractalPresenter
 {
     /**
      * Transformer
@@ -19,6 +19,6 @@ class UnitValuesPresenter extends FractalPresenter
      */
     public function getTransformer()
     {
-        return new UnitValuesTransformer();
+        return new PollutantTransformer();
     }
 }

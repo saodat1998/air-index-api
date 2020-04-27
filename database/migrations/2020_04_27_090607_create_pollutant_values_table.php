@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateUnitValuesTable.
+ * Class CreatePollutantValuesTable.
  */
-class CreateUnitValuesTable extends Migration
+class CreatePollutantValuesTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,10 +15,10 @@ class CreateUnitValuesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('unit_values', function(Blueprint $table) {
+		Schema::create('pollutant_values', function(Blueprint $table) {
 			$table->id();
-			$table->unsignedBigInteger('unit_id');
-            $table->foreign('unit_id')->references('id')->on('units');
+			$table->unsignedBigInteger('pollutant_id');
+            $table->foreign('pollutant_id')->references('id')->on('pollutants');
 			$table->unsignedBigInteger('aqi_category_id');
             $table->foreign('aqi_category_id')->references('id')->on('aqi_categories');
 			$table->float('min');
@@ -35,6 +35,6 @@ class CreateUnitValuesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('unit_values');
+		Schema::drop('pollutant_values');
 	}
 }

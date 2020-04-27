@@ -23,7 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(\App\Repositories\Contracts\UnitRepository::class, \App\Repositories\UnitRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\Contracts\PollutantRepository::class, \App\Repositories\PollutantRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\Contracts\RoleRepository::class, \App\Repositories\RoleRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\Contracts\DepartmentRepository::class, \App\Repositories\DepartmentRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\Contracts\TechnicalValuesRepository::class, \App\Repositories\TechnicalValuesRepositoryEloquent::class);
@@ -34,7 +34,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\Contracts\RegionRepository::class, \App\Repositories\RegionRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\Contracts\LocationRepository::class, \App\Repositories\LocationRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\Contracts\ResourceRepository::class, \App\Repositories\ResourceRepositoryEloquent::class);
-        $this->app->bind(\App\Repositories\Contracts\UnitValuesRepository::class, \App\Repositories\UnitValuesRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\Contracts\PollutantValuesRepository::class, \App\Repositories\PollutantValuesRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\Contracts\AqiValuesRepository::class, \App\Repositories\AqiValuesRepositoryEloquent::class);
         //:end-bindings:
     }

@@ -4,16 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\Contracts\UnitValuesRepository;
-use App\Models\UnitValues;
-use App\Validators\UnitValuesValidator;
+use App\Repositories\Contracts\PollutantRepository;
+use App\Models\Pollutant;
+use App\Validators\PollutantValidator;
 
 /**
- * Class UnitValuesRepositoryEloquent.
+ * Class PollutantRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class UnitValuesRepositoryEloquent extends BaseRepository implements UnitValuesRepository
+class PollutantRepositoryEloquent extends BaseRepository implements PollutantRepository
 {
     /**
      * Specify Model class name
@@ -22,7 +22,7 @@ class UnitValuesRepositoryEloquent extends BaseRepository implements UnitValuesR
      */
     public function model()
     {
-        return UnitValues::class;
+        return Pollutant::class;
     }
 
     /**
@@ -33,7 +33,7 @@ class UnitValuesRepositoryEloquent extends BaseRepository implements UnitValuesR
     public function validator()
     {
 
-        return UnitValuesValidator::class;
+        return PollutantValidator::class;
     }
 
 
@@ -44,5 +44,5 @@ class UnitValuesRepositoryEloquent extends BaseRepository implements UnitValuesR
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

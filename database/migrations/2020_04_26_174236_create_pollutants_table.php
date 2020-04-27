@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateUnitsTable.
+ * Class CreatePollutantsTable.
  */
-class CreateUnitsTable extends Migration
+class CreatePollutantsTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,9 +15,10 @@ class CreateUnitsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('units', function(Blueprint $table) {
+		Schema::create('pollutants', function(Blueprint $table) {
             $table->id();
-			$table->text('name');
+			$table->string('name');
+			$table->string('unit_name');
 			$table->string('calculation_period')->nullable();
 			$table->text('formula')->nullable();
 			$table->text('note')->nullable();
@@ -33,6 +34,6 @@ class CreateUnitsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('units');
+		Schema::drop('pollutants');
 	}
 }

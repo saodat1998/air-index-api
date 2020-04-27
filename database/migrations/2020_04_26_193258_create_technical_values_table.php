@@ -23,8 +23,6 @@ class CreateTechnicalValuesTable extends Migration
             $table->foreign('region_id')->references('id')->on('regions');
 			$table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
-			$table->unsignedBigInteger('aqi_value_id');
-            $table->foreign('aqi_value_id')->references('id')->on('aqi_values');
             $table->integer('status');
 
             $table->timestamps();

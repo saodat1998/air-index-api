@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersTableSeeder::class);
         $this->call(RegionsTableSeeder::class);
-        $this->call(UnitsTableSeeder::class);
+        $this->call(PollutantsTableSeeder::class);
         $this->call(AqiCategoriesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
-        $this->call(UnitValuesTableSeeder::class);
+        $this->call(PollutantValuesTableSeeder::class);
     }
 }

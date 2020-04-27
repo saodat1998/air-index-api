@@ -5,11 +5,11 @@ namespace App\Repositories\Contracts;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface UnitValuesRepository.
+ * Interface PollutantRepository.
  *
  * @package namespace App\Repositories\Contracts;
  */
-interface UnitValuesRepository extends RepositoryInterface
+interface PollutantRepository extends RepositoryInterface
 {
     //
 }
