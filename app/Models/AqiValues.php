@@ -21,7 +21,8 @@ class AqiValues extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-		'unit_id',
+		'pollutant_id',
+		'technical_value_id',
 		'value',
 		'date',
 	];

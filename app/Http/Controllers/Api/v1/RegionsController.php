@@ -92,7 +92,7 @@ class RegionsController extends Controller
      */
     public function show($id)
     {
-        $region = $this->repository->find($id);
+        $region = $this->repository->with(['technical_values'])->find($id);
 
         return response()->json([
             'data' => $region,

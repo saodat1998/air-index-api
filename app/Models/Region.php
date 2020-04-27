@@ -35,4 +35,12 @@ class Region extends Model implements Transformable
 		'location_id',
 	];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function technicalValues()
+    {
+        return $this->hasMany(TechnicalValues::class);
+    }
+
 }

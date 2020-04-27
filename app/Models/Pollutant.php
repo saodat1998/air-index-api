@@ -28,4 +28,12 @@ class Pollutant extends Model implements Transformable
 		'note',
 	];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function values()
+    {
+        return $this->hasMany(PollutantValues::class);
+    }
+
 }

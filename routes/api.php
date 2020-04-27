@@ -23,7 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //----------------------------------
 // Api
 Route::group([
-    //'middleware' => 'cors',
     'prefix'     => 'v1',
     'as'         => 'api.',
     'namespace'  => 'Api\\v1',
@@ -74,7 +73,7 @@ Route::group([
 
     // Topic services
     Route::group([
-        //'middleware' => 'auth:api',
+        ////'middleware' => 'auth:api',
         'prefix'     => 'countries',
     ], function () {
 
@@ -93,7 +92,7 @@ Route::group([
 
     // AqiCategories
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'aqi-categories',
     ], function () {
 
@@ -131,7 +130,7 @@ Route::group([
 
     // Departments
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'departments',
     ], function () {
 
@@ -169,7 +168,7 @@ Route::group([
 
     // Regions
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'regions',
     ], function () {
 
@@ -207,7 +206,7 @@ Route::group([
 
     // Employees
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'employees',
     ], function () {
 
@@ -245,7 +244,7 @@ Route::group([
 
     // Research values
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'research-values',
     ], function () {
 
@@ -283,7 +282,7 @@ Route::group([
 
     // Technical values
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'technical-values',
     ], function () {
 
@@ -321,7 +320,7 @@ Route::group([
 
     // Statistics values
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'statistic-values',
     ], function () {
 
@@ -359,7 +358,7 @@ Route::group([
 
     // Units
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'pollutants',
     ], function () {
 
@@ -397,7 +396,7 @@ Route::group([
 
     // Users
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'users',
     ], function () {
 
@@ -435,7 +434,7 @@ Route::group([
 
     // Resources
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'resources',
     ], function () {
 

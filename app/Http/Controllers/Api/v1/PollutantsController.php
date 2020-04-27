@@ -49,7 +49,7 @@ class PollutantsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $units = $this->repository->all();
+        $units = $this->repository->with(['values'])->all();
 
         return response()->json([
             'data' => $units,
