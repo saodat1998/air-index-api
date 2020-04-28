@@ -56,7 +56,7 @@ class DatesController extends Controller
         $defaultStart = Carbon::createFromFormat('Y-m-d', substr($now, 0, 10))->subDays(30)->toDateString();
 
         $from = array_get($input, 'date_from', $defaultStart);
-        $to = array_get($input, 'date_from', $now);
+        $to = array_get($input, 'date_to', $now);
 
         $dates = $this->repository
             ->with(['technicalValue', 'qualities', 'statisticValue', 'researchValue'])
@@ -82,7 +82,7 @@ class DatesController extends Controller
         $defaultStart = Carbon::createFromFormat('Y-m-d', substr($now, 0, 10))->subDays(30)->toDateString();
 
         $from = array_get($input, 'date_from', $defaultStart);
-        $to = array_get($input, 'date_from', $now);
+        $to = array_get($input, 'date_to', $now);
 
         $dates = $this->repository
             ->whereBetween('date', [$from, $to])
