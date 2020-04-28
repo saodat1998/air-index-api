@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Models\ResearchValues;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -66,10 +67,20 @@ class StatisticValuesController extends Controller
     {
         try {
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+            $input = $request->all();
+            $this->validator->with($input)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $statisticValue = $this->repository->create($request->all());
+            $researchValue = ResearchValues::findOrFail(array_get($input, 'research_value_id'));
+            $researchValue->status = 2;
 
+            $statisticValue = $this->repository->newInstance();
+            $statisticValue->research_value_id = $researchValue->id;
+            $statisticValue->date_id = $researchValue->date_id;
+            $statisticValue->value = array_get($input, 'value', $researchValue->value);
+            $statisticValue->status = 1;
+            $statisticValue->employee_id = \Auth::user()->employee->id;
+            $statisticValue->save();
+            $researchValue->save();
             $response = [
                 'message' => 'StatisticValues created.',
                 'data'    => $statisticValue->toArray(),

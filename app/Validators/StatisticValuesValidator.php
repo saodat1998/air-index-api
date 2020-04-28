@@ -20,11 +20,11 @@ class StatisticValuesValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
 		'employee_id' => 'required',
-		'research_value_id'	=> 'required|unique',
+		//'research_value_id'	=> 'required|unique',
 	],
         ValidatorInterface::RULE_UPDATE => [
 		'employee_id' => 'required',
-		'research_value_id' => 'required|unique',
+		//'research_value_id' => 'required|unique',
 	],
     ];
 }
