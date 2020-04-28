@@ -73,12 +73,14 @@ class ResearchValuesController extends Controller
 
             $technicalValue = TechnicalValues::findOrFail(array_get($input, 'technical_value_id'));
             $technicalValue->status = 2;
-            $researchValue = $this->repository->create([
-                'technical_value_id' => $technicalValue->id,
-                'value' => array_get($input, 'value', $technicalValue->value),
-                'status' => 1,
-                'employee_id' => \Auth::user()->employee->id,
-            ]);
+
+            $researchValue = $this->repository->newInstance();
+            $researchValue->technical_value_id = $technicalValue->id;
+            $researchValue->date_id = $technicalValue->date_id;
+            $researchValue->value = array_get($input, 'value', $technicalValue->value);
+            $researchValue->status = 1;
+            $researchValue->employee_id = \Auth::user()->employee->id;
+            $researchValue->save();
             $technicalValue->save();
 
             $response = [
