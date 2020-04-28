@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Models\TechnicalValues;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -67,8 +68,17 @@ class ResearchValuesController extends Controller
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+            $input = $request->all();
 
-            $researchValue = $this->repository->create($request->all());
+            $technicalValue = TechnicalValues::findOrFail(array_get($input, 'technical_value_id'));
+            $technicalValue->status = 2;
+            $researchValue = $this->repository->create([
+                'technical_value_id' => $technicalValue->id,
+                'value' => array_get($input, 'value', $technicalValue->value),
+                'status' => 1,
+                'employee_id' => \Auth::user()->employee->id,
+            ]);
+            $technicalValue->save();
 
             $response = [
                 'message' => 'ResearchValues created.',
