@@ -59,7 +59,32 @@ class DatesController extends Controller
         $to = array_get($input, 'date_from', $now);
 
         $dates = $this->repository
-            ->with(['technicalValues', 'qualities', 'statisticValues', 'researchValues'])
+            ->with(['technicalValue', 'qualities', 'statisticValue', 'researchValue'])
+            ->whereBetween('date', [$from, $to])
+            ->get();
+
+        return response()->json([
+            'data' => $dates->toArray(),
+        ]);
+    }
+
+    /**
+     *  Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function statistics(Request $request)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $input = $request->all();
+        $now = Carbon::now('UTC')->format('Y-m-d');
+
+        $defaultStart = Carbon::createFromFormat('Y-m-d', substr($now, 0, 10))->subDays(30)->toDateString();
+
+        $from = array_get($input, 'date_from', $defaultStart);
+        $to = array_get($input, 'date_from', $now);
+
+        $dates = $this->repository
             ->whereBetween('date', [$from, $to])
             ->get();
 
@@ -77,7 +102,7 @@ class DatesController extends Controller
     public function show($date)
     {
         $date = $this->repository
-            ->with(['technicalValues', 'qualities', 'statisticValues', 'researchValues'])
+            ->with(['technicalValue', 'qualities', 'statisticValue', 'researchValue'])
             ->whereDate('date', $date)
             ->first();
 

@@ -17,6 +17,10 @@ class Date extends Model implements Transformable
 
     use TransformableTrait;
 
+    protected $appends = ['statistic', 'research', 'technical'];
+
+    protected $visible = ['date', 'statistic', 'research', 'technical'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,12 +31,14 @@ class Date extends Model implements Transformable
 		'date',
 	];
 
+    protected $hidden = ['id', 'created_at', 'updated_at'];
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function technicalValues()
+    public function technicalValue()
     {
-        return $this->hasMany(TechnicalValues::class, 'date_id', 'id');
+        return $this->hasOne(TechnicalValues::class, 'date_id', 'id');
     }
 
     /**
@@ -44,19 +50,34 @@ class Date extends Model implements Transformable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function statisticValues()
+    public function statisticValue()
     {
-        return $this->hasMany(StatisticValues::class, 'date_id', 'id');
+        return $this->hasOne(StatisticValues::class, 'date_id', 'id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function researchValues()
+    public function researchValue()
     {
-        return $this->hasMany(ResearchValues::class, 'date_id', 'id');
+        return $this->hasOne(ResearchValues::class, 'date_id', 'id');
+    }
+
+    public function getTechnicalAttribute()
+    {
+        return $this->technicalValue && $this->technicalValue->value ? $this->technicalValue->value : "";
+    }
+
+    public function getResearchAttribute()
+    {
+        return $this->researchValue && $this->researchValue->value ? $this->researchValue->value : "";
+    }
+
+    public function getStatisticAttribute()
+    {
+        return $this->statisticValue && $this->statisticValue->value ? $this->statisticValue->value : "";
     }
 
 }

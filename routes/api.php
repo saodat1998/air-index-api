@@ -480,6 +480,11 @@ Route::group([
             'uses' => 'DatesController@index',
         ]);
 
+        Route::get('/statistics', [
+            'as'   => 'statistics',
+            'uses' => 'DatesController@statistics',
+        ]);
+
         Route::get('/{date}', [
             'as'   => 'show',
             'uses' => 'DatesController@show',
