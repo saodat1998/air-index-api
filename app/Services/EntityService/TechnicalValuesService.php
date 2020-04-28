@@ -86,13 +86,14 @@ class TechnicalValuesService  extends BaseService implements TechnicalServiceInt
             if (!$technicalData->save()) {
                 throw new Exception('TechnicalData was not saved to the database.');
             }
+
             $qualities = array_get($data, 'qualities');
             foreach ($qualities as $key => $value) {
                 $qualityRepository = $this->qualityRepository->newInstance();
                 $qualityRepository->pollutant_id = $key;
                 $qualityRepository->value = $value;
                 $qualityRepository->technical_value_id = $technicalData->id;
-                $qualityRepository->date = $technicalData->date;
+                $qualityRepository->date_id = $technicalData->date_id;
 
                 if (!$qualityRepository->save()) {
                     throw new Exception('Quality not saved. ' .$key . ':' . $value);
