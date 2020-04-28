@@ -49,7 +49,7 @@ class EmployeesController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $employees = $this->repository->all();
+        $employees = $this->repository->with(['user', 'department'])->all();
 
         return response()->json([
             'data' => $employees,
@@ -93,7 +93,7 @@ class EmployeesController extends Controller
      */
     public function show($id)
     {
-        $employee = $this->repository->find($id);
+        $employee = $this->repository->with(['user', 'department'])->find($id);
 
         return response()->json([
             'data' => $employee,
