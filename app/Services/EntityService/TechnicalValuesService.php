@@ -76,7 +76,7 @@ class TechnicalValuesService  extends BaseService implements TechnicalServiceInt
             $technicalData = $this->repository->newInstance();
 
             $date = array_get($data, 'date');
-            $dateModel = Date::firstOrCreate(['date'=> $date]);
+            $dateModel = Date::firstOrCreate(['date'=> $date], ['date'=> $date]);
             $technicalData->region_id  = array_get($data, 'region_id');
             $technicalData->employee_id = \Auth::user()->employee->id;
             $technicalData->status = 1;
