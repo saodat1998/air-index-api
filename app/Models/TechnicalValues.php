@@ -18,7 +18,7 @@ class TechnicalValues extends Model implements Transformable
 
     use TransformableTrait, PresentableTrait;
 
-    protected $appends = ['aqi_category_name', 'region_name'];
+    protected $appends = ['aqi_category_name', 'region_name', 'researcher_value'];
 
     /**
      * The attributes that are mass assignable.
@@ -34,6 +34,19 @@ class TechnicalValues extends Model implements Transformable
 		'date_id',
 		'data_type',
 	];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function researcherValueModel()
+    {
+        return $this->hasOne(ResearchValues::class, 'technical_value_id', 'id');
+    }
+
+    public function getResearcherValueAttribute()
+    {
+        return $this->researcherValueModel && $this->researcherValueModel->value ? $this->researcherValueModel->value : '';
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -16,9 +16,9 @@ class ResearchValues extends Model implements Transformable
 {
     protected $table = 'researcher';
 
-    protected $appends = ['qualities', 'technical_value', 'date'];
+    protected $appends = ['qualities', 'technical_value', 'date', 'region_name'];
 
-    protected $visible = ['id', 'technical_value', 'date', 'value', 'qualities'];
+    protected $visible = ['id', 'technical_value', 'date', 'value', 'qualities', 'status', 'region_name'];
 
     use TransformableTrait, PresentableTrait;
 
@@ -65,6 +65,14 @@ class ResearchValues extends Model implements Transformable
     public function getTechnicalValueAttribute()
     {
         return $this->technicalModel && $this->technicalModel->value ? $this->technicalModel->value : '';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegionNameAttribute()
+    {
+        return $this->technicalModel && $this->technicalModel->region_name ? $this->technicalModel->region_name : '';
     }
 
     /**
