@@ -40,7 +40,7 @@ class Region extends Model implements Transformable
      */
     public function technicalValues()
     {
-        return $this->hasMany(TechnicalValues::class);
+        return $this->hasMany(TechnicalValues::class, 'region_id', 'id');
     }
 
 }

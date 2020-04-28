@@ -168,7 +168,6 @@ Route::group([
 
     // Regions
     Route::group([
-        'middleware' => 'auth:api',
         'prefix'     => 'regions',
     ], function () {
 
@@ -183,21 +182,25 @@ Route::group([
         ]);
 
         Route::post('/create', [
+            'middleware' => 'auth:api',
             'as'   => 'create',
             'uses' => 'RegionsController@store',
         ]);
 
         Route::get('/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'show',
             'uses' => 'RegionsController@show',
         ]);
 
         Route::post('/update/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'update',
             'uses' => 'RegionsController@update',
         ]);
 
         Route::post('/delete/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'delete',
             'uses' => 'RegionsController@destroy',
         ]);

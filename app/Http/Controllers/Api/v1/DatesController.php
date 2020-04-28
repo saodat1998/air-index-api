@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Models\Region;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -77,21 +78,52 @@ class DatesController extends Controller
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $input = $request->all();
-        $now = Carbon::now('UTC')->format('Y-m-d');
 
-        $defaultStart = Carbon::createFromFormat('Y-m-d', substr($now, 0, 10))->subDays(30)->toDateString();
 
-        $from = array_get($input, 'date_from', $defaultStart);
-        $to = array_get($input, 'date_to', $now);
+        //$now = Carbon::now('UTC')->format('Y-m-d');
 
-        $dates = $this->repository
-            ->whereBetween('date', [$from, $to])
-            ->get();
+        //$defaultStart = Carbon::createFromFormat('Y-m-d', substr($now, 0, 10))->subDays(30)->toDateString();
 
+        //$from = array_get($input, 'date_from', $defaultStart);
+        //$to = array_get($input, 'date_to', $now);
+        $region_id = array_get($input, 'region_id');
+
+        $region = Region::find($region_id);
+
+        $aqis = [];
+        $dayArray = [];
+
+        foreach ($region->technicalValues as $item) {
+            $date = $item->date->date;
+            $aqiVal = '';
+
+            $statVal = $item->researcherValueModel
+            && $item->researcherValueModel->statisticValue ? $item->researcherValueModel->statisticValue : '';
+
+            if (!$aqiVal) {
+                $aqiVal = $statVal;
+            }
+
+            $researcherValue = $statVal ? $item->researcherValue : '';
+            if (!$aqiVal) {
+                $aqiVal = $researcherValue;
+            }
+
+            $techValue = $researcherValue ? $item->value : '';
+            if (!$aqiVal) {
+                $aqiVal = $techValue;
+            }
+            array_push($aqis, $aqiVal);
+            array_push($dayArray, $date);
+        }
         return response()->json([
-            'data' => $dates->toArray(),
+            'data' => [
+                'aqi' => $aqis,
+                'days' => $dayArray
+            ],
         ]);
     }
+
 
     /**
      * Display the specified resource.
