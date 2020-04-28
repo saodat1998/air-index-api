@@ -82,6 +82,7 @@ class TechnicalValuesService  extends BaseService implements TechnicalServiceInt
             $technicalData->status = 1;
             $technicalData->date_id = $dateModel->id;
             $technicalData->data_type = "A";
+            $technicalData->value = rand(1, 99);
 
             if (!$technicalData->save()) {
                 throw new Exception('TechnicalData was not saved to the database.');
