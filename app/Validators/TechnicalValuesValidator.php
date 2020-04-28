@@ -19,12 +19,14 @@ class TechnicalValuesValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-		'aqi_category_id'=>'required',
-        'employee_id'	=> 'required',
+		'date'=>'required',
+		'region_id'=>'required',
+        'qualities'	=> 'required',
 	],
         ValidatorInterface::RULE_UPDATE => [
-		'aqi_category_id' =>'required',
-		'employee_id'	=>'required',
+		'date' =>'required',
+		'region_id' =>'required',
+		'qualities'	=>'required',
 	],
     ];
 }

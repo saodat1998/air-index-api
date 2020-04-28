@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AqiCategoriesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
         $this->call(PollutantValuesTableSeeder::class);
+        $this->call(EmployeesTableSeeder::class);
     }
 }

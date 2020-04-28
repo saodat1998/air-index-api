@@ -5,7 +5,7 @@ namespace App\Services\EntityService;
 use App\Models\TechnicalValues;
 use App\Repositories\Contracts\QualityRepository;
 use App\Repositories\Contracts\TechnicalValuesRepository;
-use App\Services\EntityService\Contracts\TechnicalService as TechnicalServiceInterface;
+use App\Services\EntityService\Contracts\TechnicalValuesService as TechnicalServiceInterface;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Log\Logger;
 use Exception;
@@ -73,16 +73,24 @@ class TechnicalValuesService  extends BaseService implements TechnicalServiceInt
 
         try {
             $technicalData = $this->repository->newInstance();
+
             $technicalData->date = array_get($data, 'date');
+            $technicalData->region_id  = array_get($data, 'region_id');
+            $technicalData->employee_id = 1;
+            $technicalData->status = 1;
+            $technicalData->data_type = "A";
 
+            if (!$technicalData->save()) {
+                throw new Exception('TechnicalData was not saved to the database.');
+            }
             $qualities = array_get($data, 'qualities');
-
             foreach ($qualities as $key => $value) {
                 $qualityRepository = $this->qualityRepository->newInstance();
                 $qualityRepository->pollutant_id = $key;
                 $qualityRepository->value = $value;
                 $qualityRepository->technical_value_id = $technicalData->id;
                 $qualityRepository->date = $technicalData->date;
+
                 if (!$qualityRepository->save()) {
                     throw new Exception('Quality not saved. ' .$key . ':' . $value);
                 }

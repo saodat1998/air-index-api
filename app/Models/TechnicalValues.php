@@ -38,9 +38,9 @@ class TechnicalValues extends Model implements Transformable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function aqiValues()
+    public function qualities()
     {
-        return $this->hasMany(AqiValues::class, 'technical_value_id', 'id');
+        return $this->hasMany(Quality::class, 'technical_value_id', 'id');
     }
 
     /**

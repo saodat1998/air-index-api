@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Services\EntityService\TechnicalValuesService;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Services\EntityService\Contracts\TechnicalValuesService;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\TechnicalValuesCreateRequest;
@@ -40,9 +37,13 @@ class TechnicalValuesController extends Controller
      *
      * @param TechnicalValuesRepository $repository
      * @param TechnicalValuesValidator $validator
+     * @param TechnicalValuesService $service
      */
-    public function __construct(TechnicalValuesRepository $repository, TechnicalValuesValidator $validator, TechnicalValuesService $service)
-    {
+    public function __construct(
+        TechnicalValuesRepository $repository,
+        TechnicalValuesValidator $validator,
+        TechnicalValuesService $service
+    ) {
         $this->repository = $repository;
         $this->validator  = $validator;
         $this->service = $service;
@@ -76,10 +77,10 @@ class TechnicalValuesController extends Controller
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $technicValue = $this->service->store($request->all());
-
+            $technic = $this->repository->with(['qualities'])->find($technicValue->id);
             $response = [
                 'message' => 'TechnicalValues created.',
-                'data'    => $technicValue->toArray(),
+                'data'    => $technic->toArray(),
             ];
 
             return response()->json($response);
