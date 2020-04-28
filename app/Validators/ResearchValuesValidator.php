@@ -19,11 +19,11 @@ class ResearchValuesValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-		'employee_id' => 'required',
+		'value' => 'required',
 		'technical_value_id'	=>'required',
 	],
         ValidatorInterface::RULE_UPDATE => [
-            'employee_id' => 'required',
+            'value' => 'required',
             'technical_value_id' =>'required',
 	],
     ];
