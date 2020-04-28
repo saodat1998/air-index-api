@@ -79,7 +79,6 @@ class DatesController extends Controller
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $input = $request->all();
 
-
         //$now = Carbon::now('UTC')->format('Y-m-d');
 
         //$defaultStart = Carbon::createFromFormat('Y-m-d', substr($now, 0, 10))->subDays(30)->toDateString();
@@ -88,8 +87,37 @@ class DatesController extends Controller
         //$to = array_get($input, 'date_to', $now);
         $region_id = array_get($input, 'region_id');
 
-        $region = Region::find($region_id);
+        if (!$region_id) {
+            $allRegions = Region::with(['technicalValues'])->get();
 
+            $regs = [];
+            $days = [];
+            $response = [];
+            foreach ($allRegions as $region) {
+                $data1 = $this->getAqiStaticsRegion($region);
+                $days['labels'] = $data1['days'];
+                $regs['datasets']['label'] = $region->name;
+                $regs['datasets']['data'] = $data1['aqi'];
+                array_push($response, $regs);
+            }
+            return response()->json([
+                'data' => $response,
+            ]);
+        }
+
+        $region = Region::with(['technicalValues'])->find($region_id);
+
+        return response()->json([
+            'data' => $this->getAqiStaticsRegion($region),
+        ]);
+    }
+
+    /**
+     * @param $region
+     * @return array[]
+     */
+    protected function getAqiStaticsRegion($region)
+    {
         $aqis = [];
         $dayArray = [];
 
@@ -115,15 +143,13 @@ class DatesController extends Controller
             }
             array_push($aqis, $aqiVal);
             array_push($dayArray, $date);
-        }
-        return response()->json([
-            'data' => [
-                'aqi' => $aqis,
-                'days' => $dayArray
-            ],
-        ]);
-    }
 
+        }
+        return [
+            'aqi' => $aqis,
+            'days' => $dayArray
+        ];
+    }
 
     /**
      * Display the specified resource.

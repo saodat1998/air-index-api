@@ -33,6 +33,7 @@ class Region extends Model implements Transformable
 		'population',
 		'vehicles',
 		'location_id',
+		'industries',
 	];
 
     /**

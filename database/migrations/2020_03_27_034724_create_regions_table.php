@@ -26,6 +26,7 @@ class CreateRegionsTable extends Migration
 			$table->string('zip_code')->nullable();
 			$table->integer('population')->nullable();
 			$table->integer('vehicles')->nullable();
+			$table->integer('industries')->nullable();
 			$table->unsignedBigInteger('location_id')->nullable();
 
             $table->timestamps();
