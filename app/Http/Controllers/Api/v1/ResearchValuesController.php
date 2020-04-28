@@ -67,8 +67,9 @@ class ResearchValuesController extends Controller
     {
         try {
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
             $input = $request->all();
+
+            $this->validator->with($input)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $technicalValue = TechnicalValues::findOrFail(array_get($input, 'technical_value_id'));
             $technicalValue->status = 2;
