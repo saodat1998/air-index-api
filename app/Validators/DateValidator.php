@@ -6,11 +6,11 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
 /**
- * Class RoleValidator.
+ * Class DateValidator.
  *
  * @package namespace App\Validators;
  */
-class RoleValidator extends LaravelValidator
+class DateValidator extends LaravelValidator
 {
     /**
      * Validation Rules
@@ -19,10 +19,10 @@ class RoleValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-		'name' => 'required|min:2',
-	],
+            'date' => 'required'
+        ],
         ValidatorInterface::RULE_UPDATE => [
-		'name' => 'name=>required|min:2',
-	],
+            'date' => 'required'
+        ],
     ];
 }

@@ -26,7 +26,7 @@ class Quality extends Model implements Transformable
         'pollutant_id',
         'technical_value_id',
         'value',
-        'date',
+        'date_id',
 	];
 
     /**

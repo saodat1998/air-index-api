@@ -197,7 +197,7 @@ class AccessTokensController extends Controller
 	 * @param \Illuminate\Http\Response $response
 	 * @return \Illuminate\Http\Response
 	 */
-	public function sendSuccessResponse(Response $response)
+	public function sendSuccessResponse(Response $response, $user)
 	{
 		$data = json_decode($response->getContent());
 
@@ -206,8 +206,11 @@ class AccessTokensController extends Controller
             'token_type' => $data->token_type,
             'expires_in' => $data->expires_in,
             'refresh_token' => $data->refresh_token,
-            'role' => 'advertiser'
 		];
+
+        if ($user->employee && $user->employee->department) {
+            $content['department'] = $user->employee->department->name;
+        }
 
 		return response($content, $response->getStatusCode())->cookie(
 			'refresh_token',

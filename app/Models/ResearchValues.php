@@ -28,7 +28,7 @@ class ResearchValues extends Model implements Transformable
         'value',
         'employee_id',
         'status',
-        'date',
+        'date_id',
 	];
 
 }

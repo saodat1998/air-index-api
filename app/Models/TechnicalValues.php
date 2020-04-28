@@ -31,7 +31,7 @@ class TechnicalValues extends Model implements Transformable
 		'region_id',
 		'aqi_category_id',
 		'status',
-		'date',
+		'date_id',
 		'data_type',
 	];
 
@@ -49,6 +49,14 @@ class TechnicalValues extends Model implements Transformable
     public function aqiCategory()
     {
         return $this->belongsTo(AqiCategory::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function date()
+    {
+        return $this->belongsTo(Date::class);
     }
 
     /**

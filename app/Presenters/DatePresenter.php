@@ -2,15 +2,15 @@
 
 namespace App\Presenters;
 
-use App\Transformers\RoleTransformer;
+use App\Transformers\DateTransformer;
 use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
- * Class RolePresenter.
+ * Class DatePresenter.
  *
  * @package namespace App\Presenters;
  */
-class RolePresenter extends FractalPresenter
+class DatePresenter extends FractalPresenter
 {
     /**
      * Transformer
@@ -19,6 +19,6 @@ class RolePresenter extends FractalPresenter
      */
     public function getTransformer()
     {
-        return new RoleTransformer();
+        return new DateTransformer();
     }
 }

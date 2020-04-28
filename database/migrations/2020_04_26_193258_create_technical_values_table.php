@@ -19,9 +19,10 @@ class CreateTechnicalValuesTable extends Migration
             $table->id();
 			$table->float('value')->nullable();
 			$table->string('data_type')->default('A');
-			$table->date('date');
 			$table->unsignedBigInteger('region_id');
             $table->foreign('region_id')->references('id')->on('regions');
+			$table->unsignedBigInteger('date_id');
+            $table->foreign('date_id')->references('id')->on('dates');
 			$table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->integer('status');

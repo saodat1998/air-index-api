@@ -28,7 +28,7 @@ class StatisticValues extends Model implements Transformable
 		'employee_id',
 		'research_value_id',
 		'status',
-		'date',
+		'date_id',
 	];
 
 }

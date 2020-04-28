@@ -16,6 +16,7 @@ class UpdateTableNameChange extends Migration
         Schema::rename('technical_values', 'technician');
         Schema::rename('statistic_values', 'statistic_collector');
         Schema::rename('research_values', 'researcher');
+        Schema::rename('dates', 'time');
     }
 
     /**
@@ -28,5 +29,6 @@ class UpdateTableNameChange extends Migration
         Schema::rename('technician', 'technical_values');
         Schema::rename('statistic_collector', 'statistic_values');
         Schema::rename('researcher', 'research_values');
+        Schema::rename('time', 'dates');
     }
 }

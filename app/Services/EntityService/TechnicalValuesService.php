@@ -2,6 +2,7 @@
 
 namespace App\Services\EntityService;
 
+use App\Models\Date;
 use App\Models\TechnicalValues;
 use App\Repositories\Contracts\QualityRepository;
 use App\Repositories\Contracts\TechnicalValuesRepository;
@@ -74,10 +75,12 @@ class TechnicalValuesService  extends BaseService implements TechnicalServiceInt
         try {
             $technicalData = $this->repository->newInstance();
 
-            $technicalData->date = array_get($data, 'date');
+            $date = array_get($data, 'date');
+            $dateModel = Date::firstOrCreate(['date'=> $date]);
             $technicalData->region_id  = array_get($data, 'region_id');
-            $technicalData->employee_id = 1;
+            $technicalData->employee_id = \Auth::user()->employee->id;
             $technicalData->status = 1;
+            $technicalData->date_id = $dateModel->id;
             $technicalData->data_type = "A";
 
             if (!$technicalData->save()) {

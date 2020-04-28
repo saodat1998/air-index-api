@@ -4,16 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\Contracts\RoleRepository;
-use App\Models\Role;
-use App\Validators\RoleValidator;
+use App\Repositories\Contracts\DateRepository;
+use App\Models\Date;
+use App\Validators\DateValidator;
 
 /**
- * Class RoleRepositoryEloquent.
+ * Class DateRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
+class DateRepositoryEloquent extends BaseRepository implements DateRepository
 {
     /**
      * Specify Model class name
@@ -22,7 +22,7 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
      */
     public function model()
     {
-        return Role::class;
+        return Date::class;
     }
 
     /**
@@ -33,7 +33,7 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
     public function validator()
     {
 
-        return RoleValidator::class;
+        return DateValidator::class;
     }
 
 

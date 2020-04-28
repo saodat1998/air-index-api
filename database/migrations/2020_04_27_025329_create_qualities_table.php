@@ -18,7 +18,8 @@ class CreateQualitiesTable extends Migration
 		Schema::create('qualities', function(Blueprint $table) {
 			$table->id();
             $table->float('value');
-            $table->date('date')->nullable();
+            $table->unsignedBigInteger('date_id');
+            $table->foreign('date_id')->references('id')->on('dates');
             $table->unsignedBigInteger('pollutant_id');
             $table->foreign('pollutant_id')->references('id')->on('pollutants');
             $table->unsignedBigInteger('technical_value_id');

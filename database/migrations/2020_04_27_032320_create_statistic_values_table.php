@@ -17,7 +17,8 @@ class CreateStatisticValuesTable extends Migration
 	{
 		Schema::create('statistic_values', function(Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->unsignedBigInteger('date_id');
+            $table->foreign('date_id')->references('id')->on('dates');
 			$table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
 			$table->float('value');
