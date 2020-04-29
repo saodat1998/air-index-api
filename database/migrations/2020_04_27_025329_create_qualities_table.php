@@ -18,7 +18,7 @@ class CreateQualitiesTable extends Migration
 		Schema::create('qualities', function(Blueprint $table) {
 			$table->id();
             $table->float('value');
-            $table->float('aqi_index');
+            $table->float('aqi_index')->nullable();
             $table->unsignedBigInteger('aqi_category_id');
             $table->foreign('aqi_category_id')->references('id')->on('aqi_categories');
             $table->unsignedBigInteger('date_id');

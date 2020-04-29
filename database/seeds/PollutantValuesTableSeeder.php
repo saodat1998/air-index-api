@@ -11,6 +11,7 @@ class PollutantValuesTableSeeder extends Seeder
      */
     public function run()
     {
+
         /* `air`.`pollutant_values` */
         $pollutant_values = array(
             array('id' => '1','pollutant_id' => '1','aqi_category_id' => '1','min' => '0.00','max' => '54.00','created_at' => NULL,'updated_at' => NULL),
@@ -52,7 +53,10 @@ class PollutantValuesTableSeeder extends Seeder
             array('id' => '37','pollutant_id' => '8','aqi_category_id' => '4','min' => '361.00','max' => '649.00','created_at' => NULL,'updated_at' => NULL),
             array('id' => '38','pollutant_id' => '8','aqi_category_id' => '5','min' => '650.00','max' => '1249.00','created_at' => NULL,'updated_at' => NULL),
             array('id' => '39','pollutant_id' => '8','aqi_category_id' => '6','min' => '1250.00','max' => '1649.00','created_at' => NULL,'updated_at' => NULL),
-            array('id' => '40','pollutant_id' => '8','aqi_category_id' => '6','min' => '1650.00','max' => '2049.00','created_at' => NULL,'updated_at' => NULL)
+            array('id' => '40','pollutant_id' => '8','aqi_category_id' => '6','min' => '1650.00','max' => '2049.00','created_at' => NULL,'updated_at' => NULL),
+            array('id' => '41','pollutant_id' => '2','aqi_category_id' => '4','min' => '165.00','max' => '204.00','created_at' => NULL,'updated_at' => NULL),
+            array('id' => '42','pollutant_id' => '2','aqi_category_id' => '5','min' => '205.00','max' => '404.00','created_at' => NULL,'updated_at' => NULL),
+            array('id' => '43','pollutant_id' => '2','aqi_category_id' => '6','min' => '405.00','max' => '604.00','created_at' => NULL,'updated_at' => NULL)
         );
 
         DB::table('pollutant_values')->insert($pollutant_values);

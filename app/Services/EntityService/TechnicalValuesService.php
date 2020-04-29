@@ -75,7 +75,6 @@ class TechnicalValuesService  extends BaseService implements TechnicalServiceInt
 
         try {
             $technicalData = $this->repository->newInstance();
-
             $date = array_get($data, 'date');
             $dateModel = Date::firstOrCreate(['date'=> $date], ['date'=> $date]);
             $technicalData->region_id  = array_get($data, 'region_id');
@@ -87,43 +86,64 @@ class TechnicalValuesService  extends BaseService implements TechnicalServiceInt
             if (!$technicalData->save()) {
                 throw new Exception('TechnicalData was not saved to the database.');
             }
-
             $qualities = array_get($data, 'qualities');
+
             foreach ($qualities as $key => $value) {
-                $qualityRepository = $this->qualityRepository->newInstance();
-                $qualityRepository->pollutant_id = $key;
-                $qualityRepository->value = $value;
-                $qualityRepository->technical_value_id = $technicalData->id;
-                $qualityRepository->date_id = $technicalData->date_id;
+                $value = (float) $value;
+                $key = (int) $key;
+                $quality = $this->qualityRepository->newInstance();
+                $quality->pollutant_id = $key;
+                $quality->value = $value;
+                $quality->technical_value_id = $technicalData->id;
+                $quality->date_id = $technicalData->date_id;
 
                 $pollutant = Pollutant::find($key);
+                if (!$pollutant) {
+                    throw new Exception('Not pollutant');
+                }
                 $selectedPollutantValue = null;
+
                 foreach ($pollutant->values as $v) {
+
+                    if ($value < $pollutant->values->min('min') || $value > $pollutant->values->max('max')) {
+                        throw new Exception('Your values is incorrect. Min:'. $pollutant->values->min('min') .'Max:' . $pollutant->values->max('max'). 'Input:' . $pollutant->name. ':' . $value);
+                    }
                     if ($value >= $v->min && $value <= $v->max) {
                         $selectedPollutantValue = $v;
-                        break;
                     }
                 }
-                //calculation AQI
-                //(100-51)/(35.4-12.1)*($value-12.1) + 51;
-                $aqiIndex = ($selectedPollutantValue->aqiCategory->max - $selectedPollutantValue->aqiCategory->min) / ($selectedPollutantValue->max - $selectedPollutantValue->min) * ($value - $selectedPollutantValue->min) + $selectedPollutantValue->aqiCategory->min;
-                // end calculation
-                $qualityRepository->aqi_category_id = $selectedPollutantValue->aqi_category_id;
-                $qualityRepository->aqi_index = $aqiIndex;
 
-                if (!$qualityRepository->save()) {
+                $aqiIndex = null;
+                //calculation AQI
+                if ($selectedPollutantValue) {
+                    $quality->aqi_category_id = $selectedPollutantValue->aqi_category_id;
+                    $categoryMax = $selectedPollutantValue->aqiCategory->max;
+                    $categoryMin = $selectedPollutantValue->aqiCategory->min;
+                    $pollutantMax = $selectedPollutantValue->max;
+                    $pollutantMin = $selectedPollutantValue->min;
+                    $aqiIndex = ($categoryMax - $categoryMin) / ($pollutantMax - $pollutantMin) * ($value - $pollutantMin) + $categoryMin;
+                }
+                // end calculation
+
+                $quality->aqi_index = $aqiIndex;
+
+                if (!$quality->save()) {
                     throw new Exception('Quality not saved. ' .$key . ':' . $value);
                 }
+
             }
+
             $maxAqi = $technicalData->qualities->max('aqi_index');
+
             $technicalData->value = $maxAqi;
+
             if (!$technicalData->save()) {
                 throw new Exception('TechnicalData was not saved to the database.');
             }
             $this->logger->info('TechnicalData was successfully saved to the database.');
 
         } catch (Exception $e) {
-            $this->rollback($e, 'An error occurred while storing an ', [
+            $this->rollback($e, $e->getMessage(), [
                 'data' => $data,
             ]);
         }
