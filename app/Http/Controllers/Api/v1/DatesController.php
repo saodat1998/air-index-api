@@ -87,24 +87,6 @@ class DatesController extends Controller
         //$to = array_get($input, 'date_to', $now);
         $region_id = array_get($input, 'region_id');
 
-        if (!$region_id) {
-            $allRegions = Region::with(['technicalValues'])->get();
-
-            $regs = [];
-            $days = [];
-            $response = [];
-            foreach ($allRegions as $region) {
-                $data1 = $this->getAqiStaticsRegion($region);
-                $days['labels'] = $data1['days'];
-                $regs['datasets']['label'] = $region->name;
-                $regs['datasets']['data'] = $data1['aqi'];
-                array_push($response, $regs);
-            }
-            return response()->json([
-                'data' => $response,
-            ]);
-        }
-
         $region = Region::with(['technicalValues'])->find($region_id);
 
         return response()->json([
@@ -123,31 +105,31 @@ class DatesController extends Controller
 
         foreach ($region->technicalValues as $item) {
             $date = $item->date->date;
-            $aqiVal = '';
 
-            $statVal = $item->researcherValueModel
-            && $item->researcherValueModel->statisticValue ? $item->researcherValueModel->statisticValue : '';
+            $aqiVal = $item->researcherValueModel
+            && $item->researcherValueModel->statisticValueModel
+                && $item->researcherValueModel->statisticValueModel->value ? $item->researcherValueModel->statisticValueModel->value : '';
 
             if (!$aqiVal) {
-                $aqiVal = $statVal;
+                $aqiVal = $item->researcherValueModel
+                && $item->researcherValueModel->statisticValueModel
+                && $item->researcherValueModel->value ? $item->researcherValueModel->value : '';
+            }
+            
+            if (!$aqiVal) {
+                $aqiVal = $item->value;
             }
 
-            $researcherValue = $statVal ? $item->researcherValue : '';
-            if (!$aqiVal) {
-                $aqiVal = $researcherValue;
-            }
 
-            $techValue = $researcherValue ? $item->value : '';
-            if (!$aqiVal) {
-                $aqiVal = $techValue;
+            if ($aqiVal) {
+                array_push($aqis, $aqiVal);
+                array_push($dayArray, $date);
             }
-            array_push($aqis, $aqiVal);
-            array_push($dayArray, $date);
 
         }
         return [
-            'aqi' => $aqis,
-            'days' => $dayArray
+            'data' => $aqis,
+            'labels' => $dayArray
         ];
     }
 
