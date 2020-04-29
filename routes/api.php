@@ -209,7 +209,6 @@ Route::group([
 
     // Employees
     Route::group([
-        'middleware' => 'auth:api',
         'prefix'     => 'employees',
     ], function () {
 
@@ -224,6 +223,7 @@ Route::group([
         ]);
 
         Route::post('/create', [
+            'middleware' => 'auth:api',
             'as'   => 'create',
             'uses' => 'EmployeesController@store',
         ]);
@@ -234,11 +234,13 @@ Route::group([
         ]);
 
         Route::post('/update/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'update',
             'uses' => 'EmployeesController@update',
         ]);
 
         Route::post('/delete/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'delete',
             'uses' => 'EmployeesController@destroy',
         ]);
@@ -247,7 +249,6 @@ Route::group([
 
     // Research values
     Route::group([
-        'middleware' => 'auth:api',
         'prefix'     => 'research-values',
     ], function () {
 
@@ -262,6 +263,7 @@ Route::group([
         ]);
 
         Route::post('/create', [
+            'middleware' => 'auth:api',
             'as'   => 'create',
             'uses' => 'ResearchValuesController@store',
         ]);
@@ -272,11 +274,13 @@ Route::group([
         ]);
 
         Route::post('/update/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'update',
             'uses' => 'ResearchValuesController@update',
         ]);
 
         Route::post('/delete/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'delete',
             'uses' => 'ResearchValuesController@destroy',
         ]);
@@ -285,7 +289,6 @@ Route::group([
 
     // Technical values
     Route::group([
-        //'middleware' => 'auth:api',
         'prefix'     => 'technical-values',
     ], function () {
 
@@ -300,6 +303,7 @@ Route::group([
         ]);
 
         Route::post('/create', [
+            'middleware' => 'auth:api',
             'as'   => 'create',
             'uses' => 'TechnicalValuesController@store',
         ]);
@@ -310,11 +314,13 @@ Route::group([
         ]);
 
         Route::post('/update/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'update',
             'uses' => 'TechnicalValuesController@update',
         ]);
 
         Route::post('/delete/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'delete',
             'uses' => 'TechnicalValuesController@destroy',
         ]);
@@ -323,7 +329,6 @@ Route::group([
 
     // Statistics values
     Route::group([
-        'middleware' => 'auth:api',
         'prefix'     => 'statistic-values',
     ], function () {
 
@@ -338,6 +343,7 @@ Route::group([
         ]);
 
         Route::post('/create', [
+            'middleware' => 'auth:api',
             'as'   => 'create',
             'uses' => 'StatisticValuesController@store',
         ]);
@@ -348,11 +354,13 @@ Route::group([
         ]);
 
         Route::post('/update/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'update',
             'uses' => 'StatisticValuesController@update',
         ]);
 
         Route::post('/delete/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'delete',
             'uses' => 'StatisticValuesController@destroy',
         ]);
@@ -361,7 +369,6 @@ Route::group([
 
     // Units
     Route::group([
-        'middleware' => 'auth:api',
         'prefix'     => 'pollutants',
     ], function () {
 
@@ -376,6 +383,7 @@ Route::group([
         ]);
 
         Route::post('/create', [
+            'middleware' => 'auth:api',
             'as'   => 'create',
             'uses' => 'PollutantsController@store',
         ]);
@@ -386,11 +394,13 @@ Route::group([
         ]);
 
         Route::post('/update/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'update',
             'uses' => 'PollutantsController@update',
         ]);
 
         Route::post('/delete/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'delete',
             'uses' => 'PollutantsController@destroy',
         ]);
@@ -399,7 +409,6 @@ Route::group([
 
     // Users
     Route::group([
-        'middleware' => 'auth:api',
         'prefix'     => 'users',
     ], function () {
 
@@ -414,6 +423,7 @@ Route::group([
         ]);
 
         Route::post('/create', [
+            'middleware' => 'auth:api',
             'as'   => 'create',
             'uses' => 'UsersController@store',
         ]);
@@ -424,11 +434,13 @@ Route::group([
         ]);
 
         Route::post('/update/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'update',
             'uses' => 'UsersController@update',
         ]);
 
         Route::post('/delete/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'delete',
             'uses' => 'UsersController@destroy',
         ]);
@@ -437,7 +449,6 @@ Route::group([
 
     // Resources
     Route::group([
-        'middleware' => 'auth:api',
         'prefix'     => 'resources',
     ], function () {
 
@@ -452,6 +463,7 @@ Route::group([
         ]);
 
         Route::post('/create', [
+            'middleware' => 'auth:api',
             'as'   => 'create',
             'uses' => 'ResourcesController@store',
         ]);
@@ -462,11 +474,13 @@ Route::group([
         ]);
 
         Route::post('/update/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'update',
             'uses' => 'ResourcesController@update',
         ]);
 
         Route::post('/delete/{id}', [
+            'middleware' => 'auth:api',
             'as'   => 'delete',
             'uses' => 'ResourcesController@destroy',
         ]);
