@@ -106,7 +106,7 @@ class TechnicalValuesService  extends BaseService implements TechnicalServiceInt
                 foreach ($pollutant->values as $v) {
 
                     if ($value < $pollutant->values->min('min') || $value > $pollutant->values->max('max')) {
-                        throw new Exception('Your values is incorrect. Min:'. $pollutant->values->min('min') .'Max:' . $pollutant->values->max('max'). 'Input:' . $pollutant->name. ':' . $value);
+                        throw new Exception('Some values are incorrect. Min:'. $pollutant->values->min('min') .'. Max:' . $pollutant->values->max('max'). '. Input:' . $pollutant->name. ':' . $value);
                     }
                     if ($value >= $v->min && $value <= $v->max) {
                         $selectedPollutantValue = $v;
