@@ -15,7 +15,7 @@ class Quality extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $appends = ['pollutant_name'];
+    protected $appends = ['pollutant_name', 'aqi_category_name'];
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +27,8 @@ class Quality extends Model implements Transformable
         'technical_value_id',
         'value',
         'date_id',
+        'aqi_index',
+        'aqi_category_id',
 	];
 
     /**
@@ -35,6 +37,22 @@ class Quality extends Model implements Transformable
     public function pollutant()
     {
         return $this->belongsTo(Pollutant::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function aqiCategory()
+    {
+        return $this->belongsTo(AqiCategory::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAqiCategoryNameAttribute()
+    {
+        return $this->aqiCategory ? $this->aqiCategory->name : "";
     }
 
     /**

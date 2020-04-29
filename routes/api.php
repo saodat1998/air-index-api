@@ -285,7 +285,7 @@ Route::group([
 
     // Technical values
     Route::group([
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
         'prefix'     => 'technical-values',
     ], function () {
 
